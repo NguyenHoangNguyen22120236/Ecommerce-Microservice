@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: config-demo
+  profiles:
+    active: prod
+  config:
+    import: configserver:http://localhost:8888
+
+
+build:
+  id: ${ID}
+  version: ${VERSION}
+  name: ${NAME}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh

@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/NguyenHoangNguyen22120236/app-configuration
+          username: ${GIT_USER}
+          password: ${GIT_TOKEN}
+
+server:
+  port: 8888
