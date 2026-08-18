@@ -9,5 +9,18 @@ spring:
           username: ${GIT_USER}
           password: ${GIT_TOKEN}
 
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+
 server:
   port: 8888
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
