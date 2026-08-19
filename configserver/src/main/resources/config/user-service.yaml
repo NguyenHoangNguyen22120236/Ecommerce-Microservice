@@ -2,6 +2,17 @@ spring:
   mongodb:
     uri: ${MONGODB_URI}
     database: ${MONGODB_DATABASE}
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
 #  datasource:
 #    url: jdbc:postgresql://localhost:5432/userdb
 #    username: embarkx
