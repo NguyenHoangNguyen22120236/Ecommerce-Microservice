@@ -1,0 +1,54 @@
+﻿# Build output
+**/target/
+**/out/
+**/build/
+
+# Maven wrapper/runtime files
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# Java artifacts
+*.class
+*.jar
+*.war
+*.ear
+*.nar
+*.log
+hs_err_pid*
+replay_pid*
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Logs
+logs/
+*.log
+
+# IDE/editor files
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+*.swp
+*.swo
+*~
+
+# IntelliJ HTTP client generated state
+**/.idea/httpRequests/
+
+# OS metadata
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Test/coverage output
+coverage/
+*.exec
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
