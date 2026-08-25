@@ -4,6 +4,9 @@ import com.ecommercemicroservice.user.dto.UserResponse;
 import com.ecommercemicroservice.user.services.UserService;
 import com.ecommercemicroservice.user.dto.UserRequest;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +16,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/users")
+@Slf4j
 public class UserController {
 
     private final UserService userService;
@@ -25,6 +29,9 @@ public class UserController {
 
     @GetMapping("/{id}")
     public ResponseEntity<UserResponse> getUser(@PathVariable String id){
+        log.info("Fetching user with id: " + id);
+
+        log.trace("Fetching user with id: " + id);
         return userService.fetchUser(id)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());

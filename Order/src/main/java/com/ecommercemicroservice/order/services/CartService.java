@@ -1,8 +1,13 @@
 package com.ecommercemicroservice.order.services;
 
+import com.ecommercemicroservice.order.clients.ProductServiceClient;
+import com.ecommercemicroservice.order.clients.UserServiceClient;
 import com.ecommercemicroservice.order.dtos.CartItemRequest;
+import com.ecommercemicroservice.order.dtos.ProductResponse;
+import com.ecommercemicroservice.order.dtos.UserResponse;
 import com.ecommercemicroservice.order.models.CartItem;
 import com.ecommercemicroservice.order.repositories.CartItemRepository;
+import com.ecommercemicroservice.order.repositories.OrderRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,16 +22,26 @@ import java.util.Optional;
 public class CartService {
     private final CartItemRepository cartItemRepository;
 
+    private final ProductServiceClient productServiceClient;
+
+    private final UserServiceClient  userServiceClient;
+
+
     public boolean addToCart(Long userId, CartItemRequest request) {
-//        // Look for product
-//        Optional<Product> productOpt = productRepository.findById(request.getProductId());
-//        if (productOpt.isEmpty())
-//            return false;
-//
-//        Product product = productOpt.get();
-//        if (product.getStockQuantity() < request.getQuantity())
-//            return false;
-//
+        // Look for product
+        ProductResponse productResponse = productServiceClient.getProductById(request.getProductId());
+        if (productResponse == null)
+           return false;
+
+        if (productResponse.getStockQuantity() < request.getQuantity())
+            return false;
+
+        UserResponse userResponse = userServiceClient.getUserById(userId);
+        if (userResponse == null){
+            return false;
+        }
+
+        //
 //        Optional<User> userOpt = userRepository.findById(Long.valueOf(userId));
 //        if (userOpt.isEmpty())
 //            return false;
