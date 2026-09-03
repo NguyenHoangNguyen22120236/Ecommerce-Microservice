@@ -30,6 +30,14 @@ management:
 #    hibernate:
 #      ddl-auto: create
 
+rabbitmq:
+  exchange:
+    name: order.exchange
+  queue:
+    name: order.queue
+  routing:
+    key: order.tracking
+
 server:
   port: 8083
 
@@ -50,3 +58,27 @@ logging:
     rollingpolicy:
       max-file-size: 5MB
       max-history: 7
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      productService:
+        registerHealthIndicator: true
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+        permittedNumberOfCallsInHalfOpenState: 3
+        waitDurationInOpenState: 10s
+        failureRateThreshold: 50
+
+  retry:
+    instances:
+      retryBreaker:
+        maxAttempts: 5
+        waitDuration: 500ms
+
+  ratelimiter:
+    instances:
+      retryBreaker:
+        timeout-duration: 0
+        limit-refresh-period: 4
+        limit-for-period: 2

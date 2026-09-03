@@ -1,5 +1,6 @@
 package com.ecommercemicroservice.order.controllers;
 
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +13,12 @@ public class MessageController {
     private String message;
 
     @GetMapping("/message")
+    @RateLimiter(name = "retryBreaker", fallbackMethod = "fallbackRetry")
     public String getMessage() {
         return message;
+    }
+
+    public String fallbackRetry(Exception e) {
+        return "Hello Fallback";
     }
 }
