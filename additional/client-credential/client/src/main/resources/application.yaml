@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: client
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak-client:
+            provider: keycloak
+            client-id: oauth2-client-credential
+
+            client-secret: 9VdcVEHC6HKxqjV4xBTvzoqFQ1162fyKhUAQZsW9AVYzmgr7IgYQxbuEtYKN6qTmcF2XhVvZL6n8neTRVg2sfJ
+
+            scope:
+              - openid
+
+            authorization-grant-type: client_credentials
+
+        provider:
+          keycloak-client:
+            token-uri: http://localhost:8443/realms/oauth2-demos/protocol/openid-connect/token
+
+
+service2:
+  url: http://localhost:8082

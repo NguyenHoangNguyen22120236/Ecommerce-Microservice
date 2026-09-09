@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: auth-code-flow
+
+  security:
+    oauth2:
+      client:
+        registration:
+          oauth2-authorization-code-flow:
+            provider: keycloak
+            client-id: oauth2-authorization-code-flow
+
+            client-secret: m5wrMKM189xlOlZSDLIbKPa9X6ORN1wnUwvNLGF1CmcaYZRxBUYT62ylbL7ZPaPTUNRmquGiH9rEkRAFJSR8TN
+
+            scope:
+              - openid
+              - profile
+              - roles
+              - email
+
+            authorization-grant-type: authorization_code
+
+            redirect-uri: http://localhost:8080/login/oauth2/code/oauth2-authorization-code-flow
+
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8443/realms/oauth2-demos
